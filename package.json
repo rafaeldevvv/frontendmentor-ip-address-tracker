@@ -1,0 +1,27 @@
+{
+  "name": "ip-address-tracker",
+  "version": "1.0.0",
+  "description": "A simple page that uses the IP Geolocation API and Leaflet API to track down IP addresses.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaeldevvv/frontendmentor-ip-address-tracker.git"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "javascript",
+    "ip",
+    "tailwindcss"
+  ],
+  "author": "Rafael Maia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafaeldevvv/frontendmentor-ip-address-tracker/issues"
+  },
+  "homepage": "https://github.com/rafaeldevvv/frontendmentor-ip-address-tracker#readme"
+}
