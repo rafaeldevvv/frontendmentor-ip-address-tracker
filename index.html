@@ -10,63 +10,69 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="styles/index.css" />
 
     <title>Frontend Mentor | IP Address Tracker</title>
   </head>
   <body>
     <main>
-      <article>
+      <article class="wrapper">
         <div class="upper-container">
-          <header>
-            <h1>IP Address Tracker</h1>
-          </header>
-  
-          <form class="js-ip-form ip-form">
-            <input
-              type="text"
-              placeholder="Search for any IP address or domain"
-              name="ip"
-            />
-  
-            <button aria-label="Find" class="js-find-btn ip-form__btn"></button>
-          </form>
-  
-          <section class="ip-info" aria-live="polite" aria-atomic="true">
-            <header class="sr-only">
-              <h2>IP Address Information</h2>
+          <div class="size-container">
+            <header>
+              <h1>IP Address Tracker</h1>
             </header>
-            <section>
-              <header>
-                <h2>IP Address</h2>
-              </header>
-              <p class="js-ip-output"></p>
+
+            <form class="js-ip-form ip-form">
+              <input
+                type="text"
+                placeholder="Search for any IP address or domain"
+                name="ip"
+                class="ip-form__input"
+              />
+
+              <button
+                aria-label="Track"
+                class="js-find-btn ip-form__btn"
+              ></button>
+            </form>
+
+            <section class="ip-info" aria-live="polite" aria-atomic="true">
+              <h2 class="sr-only">IP Address Information</h2>
+              <section class="ip-info__unit">
+                <h3>IP Address</h3>
+                <p class="js-ip-output">192.123.12.312</p>
+              </section>
+              <div class="ip-info__separator"></div>
+              <section class="ip-info__unit">
+                <h3>Location</h3>
+                <p class="js-location-output">Espirito Santo, Brazil</p>
+              </section>
+              <div class="ip-info__separator"></div>
+              <section class="ip-info__unit">
+                <h3>Timezone</h3>
+                <!-- add offset value dynamically using the API -->
+                <p class="js-timezone-output">UTC -5:00</p>
+              </section>
+              <div class="ip-info__separator"></div>
+              <section class="ip-info__unit">
+                <h3>ISP</h3>
+                <p class="js-isp-output">Brasileising</p>
+              </section>
             </section>
-            <section>
-              <header>
-                <h2>Location</h2>
-              </header>
-              <p class="js-location-output"></p>
-            </section>
-            <section>
-              <header>
-                <h2>Timezone</h2>
-              </header>
-              <!-- add offset value dynamically using the API -->
-              <p class="js-timezone-output">UTC</p>
-            </section>
-            <section>
-              <header>
-                <h2>ISP</h2>
-              </header>
-              <p class="js-isp-output"></p>
-            </section>
-          </section>
+          </div>
         </div>
 
-        <section class="map" id="map" aria-label="map">
-
-        </section>
+        <section class="map" id="map" aria-label="map"></section>
       </article>
     </main>
 
@@ -74,7 +80,7 @@
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
         >Frontend Mentor</a
-      >. Coded by <a href="#">Your Name Here</a>.
+      >. Coded by <a href="https://rafaeldevvv.github.io/portfolio">rafaeldevvv</a>.
     </footer>
   </body>
 </html>
