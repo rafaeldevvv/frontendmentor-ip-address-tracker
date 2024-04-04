@@ -50,6 +50,8 @@ Users should be able to:
 - [Can I Use CSS Nesting?](https://caniuse.com/css-nesting)
 - [Why do percentage-width-sized flex box items not properly increase the width of a wrapping table that has an unspecified (i.e. auto) width?](https://stackoverflow.com/questions/34572022/why-do-percentage-width-sized-flex-box-items-not-properly-increase-the-width-of)
 - [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- [Regular expression that matches valid IPv6 addresses](https://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses)
+- [https://stackoverflow.com/questions/50661638/css-animate-custom-properties-variables](https://stackoverflow.com/questions/50661638/css-animate-custom-properties-variables)
 
 ## Author
 

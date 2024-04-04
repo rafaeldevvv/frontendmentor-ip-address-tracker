@@ -20,6 +20,10 @@
     />
 
     <link rel="stylesheet" href="styles/index.css" />
+    <link rel="stylesheet" href="styles/leaflet.css" />
+
+    <script src="scripts/leaflet.js" defer></script>
+    <script src="scripts/index.js" defer></script>
 
     <title>Frontend Mentor | IP Address Tracker</title>
   </head>
@@ -46,33 +50,48 @@
               ></button>
             </form>
 
-            <section class="ip-info" aria-live="polite" aria-atomic="true">
-              <h2 class="sr-only">IP Address Information</h2>
+            <section
+              class="ip-info"
+              aria-live="polite"
+              aria-atomic="true"
+              aria-labelledby="ip-info-heading"
+            >
+              <div class="js-spinner spinner" aria-live="polite" data-loading="false">
+                <span class="sr-only"></span>
+              </div>
+
+              <h2 class="sr-only" id="ip-info-heading">
+                IP Address Information
+              </h2>
               <section class="ip-info__unit">
                 <h3>IP Address</h3>
-                <p class="js-ip-output">192.123.12.312</p>
+                <p class="js-ip-output">-</p>
               </section>
               <div class="ip-info__separator"></div>
               <section class="ip-info__unit">
                 <h3>Location</h3>
-                <p class="js-location-output">Espirito Santo, Brazil</p>
+                <p class="js-location-output">-</p>
               </section>
               <div class="ip-info__separator"></div>
               <section class="ip-info__unit">
                 <h3>Timezone</h3>
                 <!-- add offset value dynamically using the API -->
-                <p class="js-timezone-output">UTC -5:00</p>
+                <p class="js-timezone-output">UTC -</p>
               </section>
               <div class="ip-info__separator"></div>
               <section class="ip-info__unit">
                 <h3>ISP</h3>
-                <p class="js-isp-output">Brasileising</p>
+                <p class="js-isp-output">-</p>
               </section>
             </section>
           </div>
         </div>
 
-        <section class="map" id="map" aria-label="map"></section>
+        <section aria-label="map">
+          <div id="map" class="map">
+
+          </div>
+        </section>
       </article>
     </main>
 
@@ -80,7 +99,8 @@
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
         >Frontend Mentor</a
-      >. Coded by <a href="https://rafaeldevvv.github.io/portfolio">rafaeldevvv</a>.
+      >. Coded by
+      <a href="https://rafaeldevvv.github.io/portfolio">rafaeldevvv</a>.
     </footer>
   </body>
 </html>

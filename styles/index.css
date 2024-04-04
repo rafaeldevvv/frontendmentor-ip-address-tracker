@@ -1,7 +1,21 @@
-* {
+*,
+*::before,
+*::after {
    padding: 0;
    margin: 0;
    box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+   *,
+   *::before,
+   *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+   }
 }
 
 :root {
@@ -10,6 +24,7 @@
 
    --ff-sans: "Rubik", Aria, Helvetica, sans-serif;
 }
+
 
 body {
    font-family: var(--ff-sans);
@@ -52,9 +67,8 @@ button {
 }
 
 .wrapper {
-   height: 100vh;
    display: grid;
-   grid-template-rows: 2fr 4fr;
+   grid-template-rows: clamp(12rem, 18vw, 15rem) 100vh;
 }
 
 .upper-container {
@@ -82,6 +96,10 @@ button {
    height: max-content;
    max-width: 35rem;
    margin-inline: auto;
+}
+
+:disabled {
+   opacity: 0.9;
 }
 
 .ip-form__input {
@@ -127,12 +145,83 @@ button {
 
    position: absolute;
    inset-inline: 0;
-   top: max(10.5rem, 70%);
+   top: clamp(10.5rem, 18vw, 11.5rem);
+   z-index: 9999;
 
    background-color: white;
    border-radius: 1rem;
    box-shadow: 0 3px 30px hsl(0 0% 0% / .2);
    text-align: center;
+}
+
+.spinner {
+   position: absolute;
+}
+
+@property --rotate-angle {
+   syntax: '<angle>';
+   initial-value: 0deg;
+   inherits: false;
+}
+
+@property --translate-x {
+   syntax: '<length>';
+   initial-value: 0;
+   inherits: false;
+}
+
+@property --translate-y {
+   syntax: '<length>';
+   initial-value: 0;
+   inherits: false;
+}
+
+.spinner[data-loading="true"] {
+   inset: 50% 0 0 50%;
+   transform:
+      translateX(calc(-50% + var(--translate-x))) translateY(calc(-50% + var(--translate-y))) rotate(var(--rotate-angle));
+
+   width: 2rem;
+   aspect-ratio: 1;
+
+   border: .5rem solid black;
+   border-radius: .5rem;
+   animation: spin 1s ease-in-out infinite;
+   backdrop-filter: blur(10px);
+}
+
+/* this part only works because the spinner is the first child of ip-info */
+.spinner[data-loading="true"]~* {
+   opacity: .6;
+}
+
+@keyframes spin {
+   0% {
+      --translate-x: 0;
+      --translate-y: -2rem;
+      --rotate-angle: 0deg;
+   }
+
+   25% {
+      --translate-x: 2rem;
+      --translate-y: 0rem;
+   }
+
+   50% {
+      --translate-x: 0rem;
+      --translate-y: 2rem;
+   }
+
+   75% {
+      --translate-x: -2rem;
+      --translate-y: 0rem;
+   }
+
+   100% {
+      --translate-x: 0;
+      --translate-y: -2rem;
+      --rotate-angle: 360deg;
+   }
 }
 
 @media (min-width: 30em) {
@@ -152,6 +241,11 @@ button {
       width: .1rem;
       height: 5rem;
    }
+}
+
+.map {
+   width: 100%;
+   height: 100%;
 }
 
 footer {
