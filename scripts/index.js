@@ -12,6 +12,12 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+const locationIcon = L.icon({
+   iconUrl: "images/icon-location.svg",
+   iconSize: [46, 58],
+   iconAnchor: [23, 58],
+})
+
 const ipForm = document.querySelector("form"),
    ipInput = document.querySelector("input");
 
@@ -84,7 +90,7 @@ async function handleSubmission(e) {
             if (marker) {
                marker.setLatLng(latLng)
             } else {
-               marker = L.marker(latLng, { url: "./images/icon-location.png" }).addTo(map)
+               marker = L.marker(latLng, { icon: locationIcon }).addTo(map)
             }
 
             ipOutput.textContent = ipInfo.ip;
