@@ -272,3 +272,15 @@ footer {
       background-image: url("../images/pattern-bg-desktop.png");
    }
 }
+
+[role=alert] {
+   position: fixed;
+   padding: 1rem;
+   max-width: max-content;
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: hsl(0 100% 30%);
+   color: white;
+   border-radius: .4rem;
+   box-shadow: 0 5px 20px hsl(0 0% 0% / .3);
+}

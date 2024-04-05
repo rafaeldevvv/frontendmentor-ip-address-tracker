@@ -29,14 +29,14 @@ ipInput.addEventListener("input", (e) => {
 });
 
 function reportError(err) {
-   alert(err);
+   alertUser(err, { duration: 5000 });
 }
 
 function getIpInfo(ip) {
    return fetch(
       `https://geo.ipify.org/api/v2/country,city?apiKey=at_JwmEtudkMTFT3TjvkzumsIeyKcsH7&ipAddress=${ip}`
    ).then((res) => {
-      if (res.status >= 400) throw new Error("Something went wrong: " + res.statusText);
+      if (res.status >= 400) throw new Error(`Something went wrong: (${res.status}) ${res.statusText}`);
       else return res.json();
    });
 }
@@ -76,7 +76,7 @@ async function handleSubmission(e) {
          const ipInfo = await getIpInfo(ip);
 
          if (ipInfo.isp === "") {
-            reportError(`'${ip}' was not found`);
+            throw new Error(`'${ip}' was not found`);
          } else {
             const latLng = [ipInfo.location.lat, ipInfo.location.lng];
 
@@ -105,3 +105,98 @@ async function handleSubmission(e) {
 }
 
 ipForm.addEventListener("submit", handleSubmission);
+
+function createAlert(announcement) {
+   const customAlert = document.createElement("div");
+   customAlert.role = "alert";
+   customAlert.textContent = announcement;
+   return customAlert;
+}
+
+
+/*
+#########################################
+Custom alert
+#########################################
+*/
+
+let currentTimeout,
+   showingAlert = false,
+   animationDuration;
+
+function alertUser(
+   announcement,
+   options
+) {
+   const { duration = 10000 } = options || {};
+
+   clearTimeout(currentTimeout);
+   document.querySelector("[role=alert]")?.remove();
+
+   const customAlert = createAlert(announcement.toString());
+   document.body.appendChild(customAlert);
+   showingAlert = true;
+
+   animationDuration = Math.min(0.1 * duration, 300);
+
+   const animationOptions = {
+      duration: animationDuration,
+      iterations: 1,
+      fill: "both",
+   };
+
+   fadeInDown(customAlert, animationOptions);
+   currentTimeout = setTimeout(() => {
+      dismiss();
+   }, duration - animationDuration);
+}
+
+let dismissing = false;
+
+function dismiss() {
+   if (!showingAlert || dismissing) return;
+
+   const animationOptions = {
+      duration: animationDuration,
+      iterations: 1,
+      fill: "both",
+   };
+
+   const customAlert = document.querySelector("[role='alert']");
+
+   clearTimeout(currentTimeout);
+   currentTimeout = undefined;
+
+   dismissing = true;
+   fadeOutUp(customAlert, animationOptions, () => {
+      customAlert.remove();
+      showingAlert = false;
+      dismissing = false;
+      animationDuration = undefined;
+   });
+}
+
+function fadeInDown(element, options) {
+   element.animate(
+      [
+         { opacity: 0, top: "-3.5rem" },
+         { opacity: 1, top: "1.5rem" },
+      ],
+      options
+   );
+}
+
+function fadeOutUp(
+   element,
+   options,
+   callback
+) {
+   const fadeOut = element.animate(
+      [
+         { opacity: 1, top: "1.5rem" },
+         { opacity: 0, top: "-3.5rem" },
+      ],
+      options
+   );
+   if (callback) fadeOut.onfinish = callback;
+}
