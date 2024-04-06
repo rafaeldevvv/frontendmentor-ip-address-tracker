@@ -21,9 +21,14 @@
 
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/leaflet.css" />
-
+    
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js" defer></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js" defer></script>
     <script src="scripts/leaflet.js" defer></script>
     <script src="scripts/index.js" defer></script>
+
+
+    <script src="https://kit.fontawesome.com/134d9c6f51.js" crossorigin="anonymous"></script>
 
     <title>Frontend Mentor | IP Address Tracker</title>
   </head>
@@ -37,25 +42,29 @@
             </header>
 
             <form class="js-ip-form ip-form" role="search">
-              <label class="sr-only" for="id" id="search-label"
-                >Search for any IP Address or domain</label
-              >
-              <input
-                type="text"
-                placeholder="Search for any IP address or domain"
-                name="ip"
-                id="ip"
-                class="ip-form__input"
-              />
+              <div class="ip-form__input-wrapper">
+                <label class="sr-only" for="ip" id="search-label"
+                  >Search for any IP Address or domain</label
+                >
+                <input
+                  type="text"
+                  placeholder="Search for any IP address or domain"
+                  name="ip"
+                  id="ip"
+                  class="ip-form__input"
+                />
+  
+                <p class="sr-only">Leave this field empty to see your own IP Address</p>
+                <div tabindex="0" id="info-icon" class="info-icon">
+                  <i class="fa-solid fa-circle-info"></i>
+                </div>
+              </div>
 
               <button
                 aria-label="Track"
                 class="js-find-btn ip-form__btn"
               ></button>
             </form>
-
-            <!-- ################### last thing ######################### -->
-            <!-- ################### decide where this will go ######################### -->
 
             <div class="ip-info-wrapper">
               <div

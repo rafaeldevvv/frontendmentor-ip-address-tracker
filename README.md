@@ -45,6 +45,8 @@ Users should be able to:
 - Mobile-first workflow
 - [IP Geolocation API by IPify](https://geo.ipify.org/)
 - [LeafletJS](https://leafletjs.com/)
+- [Tippy.js](https://atomiks.github.io/tippyjs/)
+- [Font Awesome](https://fontawesome.com)
 
 ### Useful resources
 
@@ -55,6 +57,7 @@ Users should be able to:
 - [Regular expression that matches valid IPv6 addresses](https://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses)
 - [CSS animate custom properties/variables](https://stackoverflow.com/questions/50661638/css-animate-custom-properties-variables)
 - [What is a regular expression which will match a valid domain name without a subdomain?](https://stackoverflow.com/questions/10306690/what-is-a-regular-expression-which-will-match-a-valid-domain-name-without-a-subd)
+- [6 Free Libraries to Create Tooltips in JavaScript](https://www.syncfusion.com/blogs/post/6-free-javascript-tooltip-libraries)
 
 ## Author
 

@@ -1,3 +1,7 @@
+tippy("#info-icon", {
+   content: "Leave this field empty to see your own IP Address",
+})
+
 const ipv4RegExp = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/,
    ipv6RegExp =
       /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
@@ -78,7 +82,7 @@ function hideLoadingState() {
 async function handleSubmission(e) {
    e.preventDefault();
    const ipOrDomain = ipForm.ip.value;
-   if (ipv4RegExp.test(ipOrDomain) || ipv6RegExp.test(ipOrDomain) || domainRegExp.test(ipOrDomain)) {
+   if (ipv4RegExp.test(ipOrDomain) || ipv6RegExp.test(ipOrDomain) || domainRegExp.test(ipOrDomain) || ipOrDomain === '') {
       try {
          disableForm();
          showLoadingState();

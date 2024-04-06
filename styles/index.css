@@ -95,6 +95,7 @@ button {
    display: flex;
    height: max-content;
    max-width: 35rem;
+   width: 100%;
    margin-inline: auto;
 }
 
@@ -102,14 +103,28 @@ button {
    opacity: 0.9;
 }
 
-.ip-form__input {
+.ip-form__input-wrapper {
+   display: flex;
+   align-items: center;
+   background-color: white;
    border-radius: 1rem 0 0 1rem;
+   padding-inline-start: 1rem;
+   overflow: hidden;
+   flex-grow: 1;
+}
+
+.ip-form__input-wrapper:has(.ip-form__input:focus) {
+   outline: 2px solid black;
+}
+
+.ip-form__input {
    display: block;
    width: 100%;
    border: 0;
    height: var(--control-height);
-   padding-inline: 1rem;
    font-weight: 700;
+   font-size: clamp(.92rem, 4vw, 1.1rem);
+   outline: 0;
 }
 
 .ip-form__input::placeholder {
@@ -117,6 +132,13 @@ button {
    font-size: clamp(.92rem, 4vw, 1.1rem);
    color: hsl(var(--clr-dark-gray))
 }
+
+.info-icon {
+   outline-offset: .3rem;
+   margin-inline: 1rem;
+   color: hsl(var(--clr-dark-gray));
+}
+
 
 .ip-form__btn {
    border-radius: 0 1rem 1rem 0;
