@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="stylesheet" href="styles/leaflet.css" />
-    
+
     <script src="scripts/leaflet.js" defer></script>
     <script src="scripts/index.js" defer></script>
 
@@ -36,7 +36,7 @@
               <h1>IP Address Tracker</h1>
             </header>
 
-            <form class="js-ip-form ip-form">
+            <form class="js-ip-form ip-form" role="search">
               <input
                 type="text"
                 placeholder="Search for any IP address or domain"
@@ -50,47 +50,54 @@
               ></button>
             </form>
 
-            <section
-              class="ip-info"
-              aria-live="polite"
-              aria-atomic="true"
-              aria-labelledby="ip-info-heading"
-            >
-              <div class="js-spinner spinner" aria-live="polite" data-loading="false">
+            <!-- ################### last thing ######################### -->
+            <!-- ################### decide where this will go ######################### -->
+
+            <div class="ip-info-wrapper">
+              <div
+                class="js-spinner spinner"
+                aria-live="polite"
+                data-loading="false"
+              >
                 <span class="sr-only"></span>
               </div>
 
-              <h2 class="sr-only" id="ip-info-heading">
-                IP Address Information
-              </h2>
-              <section class="ip-info__unit">
-                <h3>IP Address</h3>
-                <p class="js-ip-output">-</p>
+              <section
+                class="ip-info"
+                aria-live="polite"
+                aria-atomic="true"
+                aria-labelledby="ip-info-heading"
+              >
+                <h2 class="sr-only" id="ip-info-heading">
+                  IP Address Information
+                </h2>
+                <section class="ip-info__unit">
+                  <h3>IP Address</h3>
+                  <p class="js-ip-output">-</p>
+                </section>
+                <div class="ip-info__separator"></div>
+                <section class="ip-info__unit">
+                  <h3>Location</h3>
+                  <p class="js-location-output">-</p>
+                </section>
+                <div class="ip-info__separator"></div>
+                <section class="ip-info__unit">
+                  <h3>Timezone</h3>
+                  <!-- add offset value dynamically using the API -->
+                  <p class="js-timezone-output">UTC -</p>
+                </section>
+                <div class="ip-info__separator"></div>
+                <section class="ip-info__unit">
+                  <h3>ISP</h3>
+                  <p class="js-isp-output">-</p>
+                </section>
               </section>
-              <div class="ip-info__separator"></div>
-              <section class="ip-info__unit">
-                <h3>Location</h3>
-                <p class="js-location-output">-</p>
-              </section>
-              <div class="ip-info__separator"></div>
-              <section class="ip-info__unit">
-                <h3>Timezone</h3>
-                <!-- add offset value dynamically using the API -->
-                <p class="js-timezone-output">UTC -</p>
-              </section>
-              <div class="ip-info__separator"></div>
-              <section class="ip-info__unit">
-                <h3>ISP</h3>
-                <p class="js-isp-output">-</p>
-              </section>
-            </section>
+            </div>
           </div>
         </div>
 
         <section aria-label="map">
-          <div id="map" class="map">
-
-          </div>
+          <div id="map" class="map"></div>
         </section>
       </article>
     </main>

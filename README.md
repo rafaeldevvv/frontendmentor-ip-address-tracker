@@ -31,8 +31,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/rafaeldevvv/frontendmentor-ip-address-tracker](https://github.com/rafaeldevvv/frontendmentor-ip-address-tracker)
+- Live Site URL: [https://rafaeldevvv.github.io/frontendmentor-ip-address-tracker/](https://rafaeldevvv.github.io/frontendmentor-ip-address-tracker/)
 
 ## My process
 
@@ -43,6 +43,8 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
+- [IP Geolocation API by IPify](https://geo.ipify.org/)
+- [LeafletJS](https://leafletjs.com/)
 
 ### Useful resources
 
@@ -51,7 +53,7 @@ Users should be able to:
 - [Why do percentage-width-sized flex box items not properly increase the width of a wrapping table that has an unspecified (i.e. auto) width?](https://stackoverflow.com/questions/34572022/why-do-percentage-width-sized-flex-box-items-not-properly-increase-the-width-of)
 - [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 - [Regular expression that matches valid IPv6 addresses](https://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses)
-- [https://stackoverflow.com/questions/50661638/css-animate-custom-properties-variables](https://stackoverflow.com/questions/50661638/css-animate-custom-properties-variables)
+- [CSS animate custom properties/variables](https://stackoverflow.com/questions/50661638/css-animate-custom-properties-variables)
 
 ## Author
 
