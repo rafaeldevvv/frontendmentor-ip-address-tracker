@@ -1,6 +1,7 @@
 const ipv4RegExp = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/,
    ipv6RegExp =
-      /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/;
+      /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
+   domainRegExp = /^(((?!-))(xn--|_)?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--)?([a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$/;
 
 const map = L.map("map", {
    center: [-20, 320],
@@ -39,9 +40,10 @@ function reportError(err) {
    alertUser(err, { duration: 5000 });
 }
 
-function getIpInfo(ip) {
+function getIpInfo(ipOrDomain) {
+   const queryStr = domainRegExp.test(ipOrDomain) ? `domain=${ipOrDomain}` : `ipAddress=${ipOrDomain}`;
    return fetch(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=at_JwmEtudkMTFT3TjvkzumsIeyKcsH7&ipAddress=${ip}`
+      `https://geo.ipify.org/api/v2/country,city?apiKey=at_JwmEtudkMTFT3TjvkzumsIeyKcsH7&${queryStr}`
    ).then((res) => {
       if (res.status >= 400) throw new Error(`Something went wrong: (${res.status}) ${res.statusText}`);
       else return res.json();
@@ -65,7 +67,7 @@ function enableForm() {
 const spinner = document.querySelector(".js-spinner");
 function showLoadingState() {
    spinner.setAttribute("data-loading", true);
-   spinner.firstElementChild.textContent = "Loading information";
+   spinner.firstElementChild.textContent = "Tracking location";
 }
 
 function hideLoadingState() {
@@ -75,15 +77,15 @@ function hideLoadingState() {
 
 async function handleSubmission(e) {
    e.preventDefault();
-   const ip = ipForm.ip.value;
-   if (ipv4RegExp.test(ip) || ipv6RegExp.test(ip)) {
+   const ipOrDomain = ipForm.ip.value;
+   if (ipv4RegExp.test(ipOrDomain) || ipv6RegExp.test(ipOrDomain) || domainRegExp.test(ipOrDomain)) {
       try {
          disableForm();
          showLoadingState();
-         const ipInfo = await getIpInfo(ip);
+         const ipInfo = await getIpInfo(ipOrDomain);
 
          if (ipInfo.isp === "") {
-            throw new Error(`'${ip}' was not found`);
+            throw new Error(`'${ipOrDomain}' was not found`);
          } else {
             const latLng = [ipInfo.location.lat, ipInfo.location.lng];
 
@@ -107,18 +109,12 @@ async function handleSubmission(e) {
          hideLoadingState();
       }
    } else {
-      reportError("Invalid IP Address");
+      reportError("Enter a valid IP address or domain");
    }
 }
 
 ipForm.addEventListener("submit", handleSubmission);
 
-function createAlert(announcement) {
-   const customAlert = document.createElement("div");
-   customAlert.role = "alert";
-   customAlert.textContent = announcement;
-   return customAlert;
-}
 
 
 /*
@@ -126,6 +122,13 @@ function createAlert(announcement) {
 Custom alert
 #########################################
 */
+
+function createAlert(announcement) {
+   const customAlert = document.createElement("div");
+   customAlert.role = "alert";
+   customAlert.textContent = announcement;
+   return customAlert;
+}
 
 let currentTimeout,
    showingAlert = false,
