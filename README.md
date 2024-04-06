@@ -27,7 +27,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![A page with a form and a map](./images/screenshot.png)
 
 ### Links
 
